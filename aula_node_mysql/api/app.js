@@ -1,4 +1,3 @@
-// simple api to connect to a mysql databaseconst express = require('express');
 const mysql = require("mysql");
 const express = require("express");
 
@@ -7,17 +6,15 @@ const port = process.env.PORT || 3000; // PEGA A VARIAVEL DE AMBIENTE PORT. CASO
 
 const TABLE_NAME = "users";
 
-// MySQL Connection Configuration
 const dbConfig = {
-  host: "host_name",
+  host: "sql_container", // precisa ser o nome do container rodando o mysql
   user: "root",
   password: "",
-  database: "user_database",
+  database: "user_database", // 3306 é a porta padrão
 };
 
 const connection = mysql.createConnection(dbConfig);
 
-// Connect to MySQL
 connection.connect((err) => {
   if (err) {
     console.error("Error connecting to MySQL:", err);
@@ -26,10 +23,8 @@ connection.connect((err) => {
   console.log("Connected to MySQL");
 });
 
-// Middleware to parse JSON in the request body
 app.use(express.json());
 
-// Route to get all data from MySQL
 app.get("/", (req, res) => {
   const query = `SELECT * FROM ${TABLE_NAME}`;
 
@@ -43,7 +38,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// Route to get info about the connection with MySQL
 app.get("/info", (req, res) => {
   res.json({
     message: "Connected to MySQL",
@@ -51,7 +45,6 @@ app.get("/info", (req, res) => {
   });
 });
 
-// Route to insert data into MySQL
 app.post("/insert", (req, res) => {
   const { name } = req.body;
 
@@ -76,7 +69,6 @@ app.post("/insert", (req, res) => {
   });
 });
 
-// Start the Express server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
