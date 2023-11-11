@@ -1,5 +1,5 @@
-# Declara uma variavel VERSION com o valor 18-alpine3.17
-ARG VERSION=18-alpine3.17 
+# Declara uma variavel VERSION com o valor latest
+ARG VERSION=18-alpine3.17
 
 # Define uma imagem base. Imagem para extendermos em nossa imagem customizada
 FROM node:${VERSION}
@@ -18,17 +18,17 @@ COPY package*.json ./
 
 COPY requirements.txt ./ 
 
-COPY input.txt ./
+COPY inputs ./inputs
 
 COPY yarn.lock ./
 
 COPY install_all_deps.sh ./
 
+COPY app.js ./
+
 # Execute comandos de terminal durante a fase de build da nossa imagem
 RUN chmod +x install_all_deps.sh
 RUN ./install_all_deps.sh
-
-COPY . .
 
 # expoe uma porta do container
 EXPOSE ${PORT}

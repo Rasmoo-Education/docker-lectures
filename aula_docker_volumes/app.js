@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   let namesList = "<ul>";
 
-  const fileData = fs.readFileSync("input.txt", { encoding: "utf-8" });
+  const fileData = fs.readFileSync("inputs/input.txt", { encoding: "utf-8" });
 
   const namesArray = fileData.split("\n");
   namesArray.forEach((name) => {
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
 app.post("/api", (req, res) => {
   const name = req.body.name;
-  fs.appendFile("input.txt", `\n${name}`, (err) => {
+  fs.appendFile("inputs/input.txt", `\n${name}`, (err) => {
     if (err) {
       console.log(err);
     }
