@@ -18,6 +18,8 @@ COPY package*.json ./
 
 COPY requirements.txt ./ 
 
+COPY input.txt ./
+
 COPY yarn.lock ./
 
 COPY install_all_deps.sh ./
