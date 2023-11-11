@@ -1,5 +1,6 @@
 // simple api to connect to a mysql databaseconst express = require('express');
 const mysql = require("mysql");
+const express = require("express");
 
 const app = express();
 const port = process.env.PORT || 3000; // PEGA A VARIAVEL DE AMBIENTE PORT. CASO NAO EXISTA, USA A PORTA 3000
@@ -8,10 +9,10 @@ const TABLE_NAME = "users";
 
 // MySQL Connection Configuration
 const dbConfig = {
-  host: "your-mysql-host",
+  host: "host_name",
   user: "root",
   password: "",
-  database: "userdb",
+  database: "user_database",
 };
 
 const connection = mysql.createConnection(dbConfig);
